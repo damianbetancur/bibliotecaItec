@@ -5,17 +5,23 @@
  */
 package com.mycompany.biblioteca.view;
 
+import com.mycompany.biblioteca.controller.UserController;
+
 /**
  *
  * @author Belén
  */
 public class JPanelMenu extends javax.swing.JPanel {
 
+    UserController controlador;
     /**
      * Creates new form JPanelMenu
      */
-    public JPanelMenu() {
+    public JPanelMenu(UserController controladorP) {
+        this.controlador = controladorP;
         initComponents();
+        
+        this.jlbl_userName.setText(this.controlador.getUserSelected().getUserName());
     }
 
     /**
@@ -27,39 +33,146 @@ public class JPanelMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbtn_nPrestamo = new javax.swing.JButton();
+        jPanel_boton = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jPanel_contenido = new javax.swing.JPanel();
+        jPanel_usuario = new javax.swing.JPanel();
+        jlbl_userName = new javax.swing.JLabel();
 
-        jbtn_nPrestamo.setText("Nuevo Prestamo");
-        jbtn_nPrestamo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_nPrestamoActionPerformed(evt);
-            }
-        });
+        setMaximumSize(new java.awt.Dimension(1014, 650));
+        setMinimumSize(new java.awt.Dimension(1014, 650));
+        setPreferredSize(new java.awt.Dimension(1014, 650));
+
+        jPanel_boton.setBackground(new java.awt.Color(153, 255, 102));
+        jPanel_boton.setMaximumSize(new java.awt.Dimension(200, 600));
+        jPanel_boton.setMinimumSize(new java.awt.Dimension(200, 600));
+        jPanel_boton.setPreferredSize(new java.awt.Dimension(200, 600));
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
+        jButton4.setText("jButton4");
+
+        jButton5.setText("jButton5");
+
+        jButton6.setText("jButton6");
+
+        javax.swing.GroupLayout jPanel_botonLayout = new javax.swing.GroupLayout(jPanel_boton);
+        jPanel_boton.setLayout(jPanel_botonLayout);
+        jPanel_botonLayout.setHorizontalGroup(
+            jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_botonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+        jPanel_botonLayout.setVerticalGroup(
+            jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_botonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6)
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+
+        jPanel_contenido.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel_contenido.setMaximumSize(new java.awt.Dimension(814, 600));
+        jPanel_contenido.setMinimumSize(new java.awt.Dimension(814, 600));
+        jPanel_contenido.setPreferredSize(new java.awt.Dimension(814, 600));
+
+        javax.swing.GroupLayout jPanel_contenidoLayout = new javax.swing.GroupLayout(jPanel_contenido);
+        jPanel_contenido.setLayout(jPanel_contenidoLayout);
+        jPanel_contenidoLayout.setHorizontalGroup(
+            jPanel_contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 814, Short.MAX_VALUE)
+        );
+        jPanel_contenidoLayout.setVerticalGroup(
+            jPanel_contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel_usuario.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel_usuario.setMaximumSize(new java.awt.Dimension(50, 1014));
+        jPanel_usuario.setMinimumSize(new java.awt.Dimension(50, 1014));
+        jPanel_usuario.setPreferredSize(new java.awt.Dimension(50, 1014));
+
+        jlbl_userName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlbl_userName.setForeground(new java.awt.Color(255, 255, 255));
+        jlbl_userName.setText("jLabel1");
+
+        javax.swing.GroupLayout jPanel_usuarioLayout = new javax.swing.GroupLayout(jPanel_usuario);
+        jPanel_usuario.setLayout(jPanel_usuarioLayout);
+        jPanel_usuarioLayout.setHorizontalGroup(
+            jPanel_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_usuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbl_userName, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel_usuarioLayout.setVerticalGroup(
+            jPanel_usuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_usuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbl_userName)
+                .addContainerGap(986, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jbtn_nPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addComponent(jPanel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jbtn_nPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel_boton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel_contenido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtn_nPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_nPrestamoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtn_nPrestamoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbtn_nPrestamo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JPanel jPanel_boton;
+    private javax.swing.JPanel jPanel_contenido;
+    private javax.swing.JPanel jPanel_usuario;
+    private javax.swing.JLabel jlbl_userName;
     // End of variables declaration//GEN-END:variables
 }

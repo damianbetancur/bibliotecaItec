@@ -5,21 +5,25 @@
  */
 package com.mycompany.biblioteca.view;
 
+import com.mycompany.biblioteca.controller.UserController;
+
 /**
  *
  * @author Belén
  */
 public class JFramePrincipal extends javax.swing.JFrame {
 
+    private UserController controlador;
     private JPanelMenu panel;
     /**
      * Creates new form JFramePrincipal
      */
-    public JFramePrincipal() {
+    public JFramePrincipal(UserController controladorP) {
+        this.controlador = controladorP;
         initComponents();
         this.setSize(1024,720);
 
-        this.panel = new JPanelMenu();
+        this.panel = new JPanelMenu(this.controlador);
         this.panel.setSize(1014, 650);
 
         this.add(this.panel);
