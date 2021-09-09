@@ -57,7 +57,7 @@ public class JPanelLogin extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jtf_user = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtf_password = new javax.swing.JTextField();
+        jtf_password = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(0, 204, 255));
         setForeground(new java.awt.Color(255, 204, 102));
@@ -74,15 +74,8 @@ public class JPanelLogin extends javax.swing.JPanel {
             }
         });
 
-        jtf_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_userActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Myanmar Text", 0, 18)); // NOI18N
         jLabel2.setText("PASSWORD");
-
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,14 +118,15 @@ public class JPanelLogin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         this.userAux = new User(jtf_user.getText(),jtf_password.getText());
 
         System.out.println(userAux.getUserName()+" "+ userAux.getPassword());
 
         if (this.controller.login(userAux)!= null){
-            JFramePrincipal principal = new JFramePrincipal();
+            this.controller.setUserSelected(userAux);
+            JFramePrincipal principal = new JFramePrincipal(this.controller);
             this.frame.dispose();
         }else {
             this.jButton1.setText("Error");
@@ -141,20 +135,12 @@ public class JPanelLogin extends javax.swing.JPanel {
 
     }
 
-    private void jtf_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_passwordActionPerformed
-
-    private void jtf_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_userActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jtf_password;
+    private javax.swing.JPasswordField jtf_password;
     private javax.swing.JTextField jtf_user;
     // End of variables declaration//GEN-END:variables
 }
