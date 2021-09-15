@@ -50,4 +50,14 @@ public class UserController {
 
         return userEncontrado;
     }
+
+    public User getUserSelected() {
+        return userSelected;
+    }
+
+    public void setUserSelected(User userSelected) {
+        this.userSelected = userSelected;
+    }
+    
+    
 }
