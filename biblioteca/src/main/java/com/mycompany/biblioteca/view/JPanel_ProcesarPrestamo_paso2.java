@@ -17,6 +17,8 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
      */
     public JPanel_ProcesarPrestamo_paso2(JPanelMenu panelMenu) {
         this.panelMenu = panelMenu;
+        
+        
         initComponents();
     }
 
