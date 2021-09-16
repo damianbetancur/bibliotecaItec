@@ -6,6 +6,8 @@
 package com.mycompany.biblioteca.view;
 
 import com.mycompany.biblioteca.controller.UserController;
+import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -34,7 +36,7 @@ public class JPanelMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel_boton = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jbtn_procesarPrestamo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -47,13 +49,19 @@ public class JPanelMenu extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(1014, 650));
         setMinimumSize(new java.awt.Dimension(1014, 650));
         setPreferredSize(new java.awt.Dimension(1014, 650));
+        setLayout(null);
 
         jPanel_boton.setBackground(new java.awt.Color(153, 255, 102));
         jPanel_boton.setMaximumSize(new java.awt.Dimension(200, 600));
         jPanel_boton.setMinimumSize(new java.awt.Dimension(200, 600));
         jPanel_boton.setPreferredSize(new java.awt.Dimension(200, 600));
 
-        jButton1.setText("jButton1");
+        jbtn_procesarPrestamo.setText("Procesar Prestamo");
+        jbtn_procesarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_procesarPrestamoActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("jButton2");
 
@@ -72,19 +80,22 @@ public class JPanelMenu extends javax.swing.JPanel {
             .addGroup(jPanel_botonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
-                .addContainerGap(117, Short.MAX_VALUE))
+                    .addComponent(jbtn_procesarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel_botonLayout.createSequentialGroup()
+                        .addGroup(jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6))
+                        .addGap(0, 107, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel_botonLayout.setVerticalGroup(
             jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jbtn_procesarPrestamo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -97,6 +108,9 @@ public class JPanelMenu extends javax.swing.JPanel {
                 .addComponent(jButton6)
                 .addContainerGap(389, Short.MAX_VALUE))
         );
+
+        add(jPanel_boton);
+        jPanel_boton.setBounds(0, 0, 200, 600);
 
         jPanel_contenido.setBackground(new java.awt.Color(102, 153, 255));
         jPanel_contenido.setMaximumSize(new java.awt.Dimension(814, 600));
@@ -113,6 +127,9 @@ public class JPanelMenu extends javax.swing.JPanel {
             jPanel_contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        add(jPanel_contenido);
+        jPanel_contenido.setBounds(206, 0, 814, 600);
 
         jPanel_usuario.setBackground(new java.awt.Color(0, 0, 0));
         jPanel_usuario.setMaximumSize(new java.awt.Dimension(50, 1014));
@@ -140,31 +157,25 @@ public class JPanelMenu extends javax.swing.JPanel {
                 .addContainerGap(986, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel_boton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel_boton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_contenido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        add(jPanel_usuario);
+        jPanel_usuario.setBounds(0, 611, 1020, 1014);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtn_procesarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_procesarPrestamoActionPerformed
+       
+       JPanel_ProcesarPrestamo_paso1 panelPaso1 = new JPanel_ProcesarPrestamo_paso1(this);
+       panelPaso1.setSize(814, 600);
+       
+       this.jPanel_contenido.removeAll();
+       this.jPanel_contenido.add(panelPaso1);
+       this.repaint();
+       this.validate();
+       
+       bloquearBotones(false);
+    }//GEN-LAST:event_jbtn_procesarPrestamoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -173,6 +184,28 @@ public class JPanelMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_boton;
     private javax.swing.JPanel jPanel_contenido;
     private javax.swing.JPanel jPanel_usuario;
+    private javax.swing.JButton jbtn_procesarPrestamo;
     private javax.swing.JLabel jlbl_userName;
     // End of variables declaration//GEN-END:variables
+
+    public void bloquearBotones(boolean estado){
+        this.jbtn_procesarPrestamo.setEnabled(estado);
+        this.jButton2.setEnabled(estado);
+        this.jButton3.setEnabled(estado);
+        this.jButton4.setEnabled(estado);
+        this.jButton5.setEnabled(estado);
+        this.jButton6.setEnabled(estado);        
+    }
+    
+    public void limpiarPanelContenido(){
+       this.jPanel_contenido.removeAll();
+       this.repaint();
+       this.validate();
+    }
+
+    public javax.swing.JPanel getjPanel_contenido() {
+        return jPanel_contenido;
+    }
+    
+    
 }
