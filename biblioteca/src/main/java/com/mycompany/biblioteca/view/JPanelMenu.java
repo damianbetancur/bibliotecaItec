@@ -37,7 +37,7 @@ public class JPanelMenu extends javax.swing.JPanel {
 
         jPanel_boton = new javax.swing.JPanel();
         jbtn_procesarPrestamo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtn_procesar_devolucion = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -63,7 +63,12 @@ public class JPanelMenu extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("jButton2");
+        jbtn_procesar_devolucion.setText("Procesar Devolucion");
+        jbtn_procesar_devolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_procesar_devolucionActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
 
@@ -83,12 +88,12 @@ public class JPanelMenu extends javax.swing.JPanel {
                     .addComponent(jbtn_procesarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_botonLayout.createSequentialGroup()
                         .addGroup(jPanel_botonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
                             .addComponent(jButton3)
                             .addComponent(jButton4)
                             .addComponent(jButton5)
                             .addComponent(jButton6))
-                        .addGap(0, 107, Short.MAX_VALUE)))
+                        .addGap(0, 107, Short.MAX_VALUE))
+                    .addComponent(jbtn_procesar_devolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel_botonLayout.setVerticalGroup(
@@ -97,7 +102,7 @@ public class JPanelMenu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jbtn_procesarPrestamo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(jbtn_procesar_devolucion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -174,9 +179,20 @@ public class JPanelMenu extends javax.swing.JPanel {
        bloquearBotones(false);
     }//GEN-LAST:event_jbtn_procesarPrestamoActionPerformed
 
+    private void jbtn_procesar_devolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_procesar_devolucionActionPerformed
+     JPanel_ProcesarDevolucion_paso1 panelDPaso1 = new JPanel_ProcesarDevolucion_paso1(this);
+     panelDPaso1.setSize(814, 600);
+
+     this.jPanel_contenido.removeAll();
+     this.jPanel_contenido.add(panelDPaso1);
+     this.repaint();
+     this.validate();
+     
+     bloquearBotones(false);
+    }//GEN-LAST:event_jbtn_procesar_devolucionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -185,12 +201,13 @@ public class JPanelMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_contenido;
     private javax.swing.JPanel jPanel_usuario;
     private javax.swing.JButton jbtn_procesarPrestamo;
+    private javax.swing.JButton jbtn_procesar_devolucion;
     private javax.swing.JLabel jlbl_userName;
     // End of variables declaration//GEN-END:variables
 
     public void bloquearBotones(boolean estado){
         this.jbtn_procesarPrestamo.setEnabled(estado);
-        this.jButton2.setEnabled(estado);
+        this.jbtn_procesar_devolucion.setEnabled(estado);
         this.jButton3.setEnabled(estado);
         this.jButton4.setEnabled(estado);
         this.jButton5.setEnabled(estado);
