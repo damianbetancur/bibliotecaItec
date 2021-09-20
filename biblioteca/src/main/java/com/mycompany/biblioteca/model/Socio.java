@@ -14,20 +14,20 @@ public class Socio {
     private String nombre;
     private String apellido;
     private String dni;
+    
+    private Biblioteca biblioteca;
 
     public Socio() {
     }
 
-    public Socio(String numeroSocio, String nombre, String apellido, String dni) {
+    public Socio(String numeroSocio, String nombre, String apellido, String dni, Biblioteca biblioteca) {
         this.numeroSocio = numeroSocio;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.biblioteca = biblioteca;
     }
 
-    
-    
-    
     public String getNumeroSocio() {
         return numeroSocio;
     }
@@ -59,6 +59,16 @@ public class Socio {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
+    
     
     
 }

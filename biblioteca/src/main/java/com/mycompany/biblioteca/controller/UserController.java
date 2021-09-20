@@ -1,34 +1,38 @@
 package com.mycompany.biblioteca.controller;
 
+import com.mycompany.biblioteca.model.Biblioteca;
+import com.mycompany.biblioteca.model.Rol;
 import com.mycompany.biblioteca.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserController {
-    User userSelected;
+    private User userSelected;
 
-    List <User> users;
+    private Biblioteca biblioteca;
+    
 
-    public UserController() {
-        this.users = new ArrayList<>();
+    public UserController() {        
         load();
     }
 
     private void load(){
-        User u1 = new User("admin", "admin");
-        User u2 = new User("user1", "user1");
-        User u3 = new User("user2", "user2");
-        User u4 = new User("user3", "user3");
-        User u5 = new User("user4", "user4");
+        biblioteca = new Biblioteca("Biblioteca del pueblo","calle falsa 123");
+        
+        Rol rol1 =new Rol("bibliotecario");
+        
+        User u1 = new User("admin", "admin", rol1, biblioteca);
+        User u2 = new User("user1", "user1", rol1, biblioteca);
+        User u3 = new User("user2", "user2", rol1, biblioteca);
+        User u4 = new User("user3", "user3", rol1, biblioteca);
+        User u5 = new User("user4", "user4", rol1, biblioteca);
 
-        this.users.add(u1);
-        this.users.add(u2);
-        this.users.add(u3);
-        this.users.add(u4);
-        this.users.add(u5);
+        this.biblioteca.getUsers().add(u1);
+        this.biblioteca.getUsers().add(u2);
+        this.biblioteca.getUsers().add(u3);
+        this.biblioteca.getUsers().add(u4);
+        this.biblioteca.getUsers().add(u5);
 
-        for (User u: this.users) {
+        for (User u: this.biblioteca.getUsers()) {
             System.out.println(u.getUserName()+" "+ u.getPassword());
         }
 
@@ -36,7 +40,7 @@ public class UserController {
 
     public User login(User userAux){
         User userEncontrado = null;
-        for (User ur: this.users) {
+        for (User ur: this.biblioteca.getUsers()) {
             if (ur.getUserName().equals(userAux.getUserName())){
                 if (ur.getPassword().equals(userAux.getPassword())){
                     userEncontrado = ur;

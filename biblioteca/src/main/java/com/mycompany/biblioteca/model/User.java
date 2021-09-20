@@ -10,13 +10,22 @@ package com.mycompany.biblioteca.model;
  * @author Belén
  */
 public class User {
-    
+
     private String userName;
     private String password;
 
-    public User(String user, String password) {
-        this.userName = user;
+    private Rol rol;
+
+    private Biblioteca biblioteca;
+
+    public User() {
+    }
+
+    public User(String userName, String password, Rol rol, Biblioteca biblioteca) {
+        this.userName = userName;
         this.password = password;
+        this.rol = rol;
+        this.biblioteca = biblioteca;
     }
 
     public String getUserName() {
@@ -34,4 +43,21 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
 }
