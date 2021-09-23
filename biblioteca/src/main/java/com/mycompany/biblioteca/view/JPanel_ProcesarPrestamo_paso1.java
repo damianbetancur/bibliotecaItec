@@ -5,17 +5,22 @@
  */
 package com.mycompany.biblioteca.view;
 
+import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
+import com.mycompany.biblioteca.model.Socio;
+
 /**
  *
  * @author ARIEL
  */
 public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
+    ProcesarPrestamoController controlador;
     private JPanelMenu panelMenu;
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
-    public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu) {
+    public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
+        this.controlador = controladorP;
         this.panelMenu = panelMenu;
         initComponents();
     }
@@ -30,7 +35,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_numeroSocio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -52,7 +57,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("N° Socio");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtf_numeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,6 +74,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre");
@@ -127,7 +137,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtf_numeroSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
@@ -149,7 +159,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf_numeroSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
                 .addGap(34, 34, 34)
@@ -200,6 +210,14 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        for (Socio sr : this.controlador.buscarSocio(jtf_numeroSocio.getText())) {
+            System.out.println(sr.getNumeroSocio());
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -216,6 +234,6 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtf_numeroSocio;
     // End of variables declaration//GEN-END:variables
 }

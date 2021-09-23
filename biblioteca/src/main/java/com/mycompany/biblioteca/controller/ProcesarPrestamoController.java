@@ -8,6 +8,10 @@ package com.mycompany.biblioteca.controller;
 import com.mycompany.biblioteca.model.Biblioteca;
 import com.mycompany.biblioteca.model.Prestamo;
 import com.mycompany.biblioteca.model.Socio;
+import com.mycompany.biblioteca.service.SocioService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,23 +20,14 @@ import com.mycompany.biblioteca.model.Socio;
 public class ProcesarPrestamoController {
     private Prestamo nuevoPrestamo;
     
-    private Biblioteca biblioteca;
+    private SocioService service;
 
-    public ProcesarPrestamoController(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
+    public ProcesarPrestamoController() {
         this.nuevoPrestamo = new Prestamo();
+        this.service = new SocioService();
     }
-    
-    
-    
-    
-    public Socio buscarSocio(String numeroSocio){
-        Socio socioEncontrado = null;
-        for (Socio socioR : biblioteca.getSocios()) {
-            if (socioR.getNumeroSocio().equals(numeroSocio)) {
-                socioEncontrado=socioR;
-            }
-        }
-        return socioEncontrado;
+
+    public List<Socio> buscarSocio(String numeroSocio){
+        return this.service.buscarSocioPorNumeroDeSocio(numeroSocio);
     }
 }
