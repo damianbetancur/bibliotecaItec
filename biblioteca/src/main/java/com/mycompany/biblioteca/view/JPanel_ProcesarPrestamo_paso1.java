@@ -7,6 +7,8 @@ package com.mycompany.biblioteca.view;
 
 import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
 import com.mycompany.biblioteca.model.Socio;
+import com.mycompany.biblioteca.view.resources.TableModelListenerSocio;
+import com.mycompany.biblioteca.view.resources.TableModelSocio;
 
 /**
  *
@@ -14,15 +16,26 @@ import com.mycompany.biblioteca.model.Socio;
  */
 public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
+    //variables de tabla
+    private final TableModelSocio tableModelSocio;
+    
+    private Socio socioSeleccionado;
+    
     ProcesarPrestamoController controlador;
     private JPanelMenu panelMenu;
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
     public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
+        //JTable vacio
+        this.tableModelSocio = new TableModelSocio();
+        
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
         initComponents();
+        
+         //agrega escuchadores de las tablas
+        this.jtb_socios.getSelectionModel().addListSelectionListener(new TableModelListenerSocio(this));
     }
 
     /**
@@ -37,18 +50,18 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jtf_numeroSocio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtb_socios = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlbl_nombre = new javax.swing.JLabel();
+        jlbl_apellido = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jlbl_dni = new javax.swing.JLabel();
+        jlbl_numeroSocio = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(814, 600));
         setMinimumSize(new java.awt.Dimension(814, 600));
@@ -59,18 +72,8 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
         jtf_numeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jtb_socios.setModel(tableModelSocio);
+        jScrollPane1.setViewportView(jtb_socios);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Buscar");
@@ -86,11 +89,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Apellido");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("jLabel4");
+        jlbl_nombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_nombre.setText("jLabel4");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("jLabel5");
+        jlbl_apellido.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_apellido.setText("jLabel5");
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("CANCELAR");
@@ -114,11 +117,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("N° Socio");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("jLabel8");
+        jlbl_dni.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_dni.setText("jLabel8");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("jLabel9");
+        jlbl_numeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_numeroSocio.setText("jLabel9");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -148,10 +151,10 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
                             .addComponent(jLabel7))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jlbl_numeroSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlbl_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlbl_apellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlbl_dni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,19 +170,19 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(jlbl_numeroSocio))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(jlbl_nombre))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(jlbl_apellido))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
+                    .addComponent(jlbl_dni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -212,6 +215,12 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        //Actualizar el TableModel con la lista del controlador
+        this.tableModelSocio.setSocios(this.controlador.buscarSocio(jtf_numeroSocio.getText()));
+        
+        //Refrescar el modelo en la tabla
+        this.tableModelSocio.fireTableDataChanged();
+        
         for (Socio sr : this.controlador.buscarSocio(jtf_numeroSocio.getText())) {
             System.out.println(sr.getNumeroSocio());
         }
@@ -226,14 +235,33 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlbl_apellido;
+    private javax.swing.JLabel jlbl_dni;
+    private javax.swing.JLabel jlbl_nombre;
+    private javax.swing.JLabel jlbl_numeroSocio;
+    private javax.swing.JTable jtb_socios;
     private javax.swing.JTextField jtf_numeroSocio;
     // End of variables declaration//GEN-END:variables
+
+/**
+     * Selecciona una fila de la tabla, devolviendo un objeto Persona
+     */
+    public void seleccionarSocio() {
+        //obtiene el indice de la fila seleccionada en la tabla de personas
+        int filaSeleccionada = this.jtb_socios.getSelectedRow();
+        // si la fila esta seleccionada, seteamos la persona auxiliar, llamando al modelo de tabla
+        if (filaSeleccionada >= 0) {
+            this.socioSeleccionado = this.tableModelSocio.obteneSocioEn(filaSeleccionada);
+            this.jlbl_numeroSocio.setText(this.socioSeleccionado.getNumeroSocio());
+            this.jlbl_nombre.setText(this.socioSeleccionado.getNombre());
+            this.jlbl_apellido.setText(this.socioSeleccionado.getApellido());
+            this.jlbl_dni.setText(this.socioSeleccionado.getDni());
+        } 
+    }
+
+
+
 }
