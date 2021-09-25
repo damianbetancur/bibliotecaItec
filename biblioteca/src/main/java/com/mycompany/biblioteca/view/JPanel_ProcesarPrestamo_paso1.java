@@ -18,23 +18,24 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
     //variables de tabla
     private final TableModelSocio tableModelSocio;
-    
+
     private Socio socioSeleccionado;
-    
+
     ProcesarPrestamoController controlador;
     private JPanelMenu panelMenu;
+
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
     public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
         //JTable vacio
         this.tableModelSocio = new TableModelSocio();
-        
+
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
         initComponents();
-        
-         //agrega escuchadores de las tablas
+
+        //agrega escuchadores de las tablas
         this.jtb_socios.getSelectionModel().addListSelectionListener(new TableModelListenerSocio(this));
     }
 
@@ -197,34 +198,40 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
-       JPanel_ProcesarPrestamo_paso2 panelPaso2 = new JPanel_ProcesarPrestamo_paso2(this.panelMenu);
-       
-       panelPaso2.setSize(814, 600);
-       
-       this.panelMenu.limpiarPanelContenido();
-       
-       
-       this.panelMenu.getjPanel_contenido().add(panelPaso2);
-       
-       this.panelMenu.repaint();
-       this.panelMenu.validate();
-       
-       
+
+        if (this.socioSeleccionado != null) {
+            this.controlador.getNuevoPrestamo().setSocio(socioSeleccionado);
+            JPanel_ProcesarPrestamo_paso2 panelPaso2 = new JPanel_ProcesarPrestamo_paso2(this.panelMenu, this.controlador);
+
+            panelPaso2.setSize(814, 600);
+
+            this.panelMenu.limpiarPanelContenido();
+
+            this.panelMenu.getjPanel_contenido().add(panelPaso2);
+
+            this.panelMenu.repaint();
+            this.panelMenu.validate();
+            
+            
+        }else{
+            System.out.println("selecciona socio");
+        }
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //Actualizar el TableModel con la lista del controlador
         this.tableModelSocio.setSocios(this.controlador.buscarSocio(jtf_numeroSocio.getText()));
-        
+
         //Refrescar el modelo en la tabla
         this.tableModelSocio.fireTableDataChanged();
-        
+
         for (Socio sr : this.controlador.buscarSocio(jtf_numeroSocio.getText())) {
             System.out.println(sr.getNumeroSocio());
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -246,7 +253,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private javax.swing.JTextField jtf_numeroSocio;
     // End of variables declaration//GEN-END:variables
 
-/**
+    /**
      * Selecciona una fila de la tabla, devolviendo un objeto Persona
      */
     public void seleccionarSocio() {
@@ -259,9 +266,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
             this.jlbl_nombre.setText(this.socioSeleccionado.getNombre());
             this.jlbl_apellido.setText(this.socioSeleccionado.getApellido());
             this.jlbl_dni.setText(this.socioSeleccionado.getDni());
-        } 
+        }
     }
-
-
 
 }

@@ -30,4 +30,10 @@ public class ProcesarPrestamoController {
     public List<Socio> buscarSocio(String numeroSocio){
         return this.service.buscarSocioPorNumeroDeSocio(numeroSocio);
     }
+
+    public Prestamo getNuevoPrestamo() {
+        return nuevoPrestamo;
+    }
+    
+    
 }

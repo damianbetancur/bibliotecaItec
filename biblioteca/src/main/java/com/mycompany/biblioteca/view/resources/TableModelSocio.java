@@ -10,19 +10,20 @@ public class TableModelSocio extends AbstractTableModel {
 
     private static final String[] COLUMNAS = {"N° Socio", "Nombre", "Apellido", "DNI"};
     private List<Socio> socios;
+    
 
     public TableModelSocio() {
         socios = new ArrayList<>();
     }
 
     @Override
-    public int getRowCount() {
+    public int getRowCount() {        
         return socios == null ? 0 : socios.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return COLUMNAS.length;
     }
 
     @Override
@@ -43,7 +44,6 @@ public class TableModelSocio extends AbstractTableModel {
             case 3:
                 retorno = socio.getDni();
                 break;
-
         }
         return retorno;
     }

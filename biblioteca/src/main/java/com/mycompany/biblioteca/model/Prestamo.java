@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class Prestamo {
     private LocalDate InicioPrestamo;
     private LocalDate finPrestamo;
+    private Socio socio;
     
     private Biblioteca biblioteca;
     
@@ -25,13 +26,15 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(LocalDate finPrestamo, Biblioteca biblioteca, User user, Libro libro, EstadoPrestamo estadoPrestamo) {
-        this.finPrestamo = finPrestamo;
+    public Prestamo(Socio socio, Biblioteca biblioteca, User user, Libro libro, EstadoPrestamo estadoPrestamo) {
+        this.socio = socio;
         this.biblioteca = biblioteca;
         this.user = user;
         this.libro = libro;
         this.estadoPrestamo = estadoPrestamo;
     }
+
+    
 
     public LocalDate getInicioPrestamo() {
         return InicioPrestamo;
@@ -79,6 +82,14 @@ public class Prestamo {
 
     public void setEstadoPrestamo(EstadoPrestamo estadoPrestamo) {
         this.estadoPrestamo = estadoPrestamo;
+    }
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
     
     
