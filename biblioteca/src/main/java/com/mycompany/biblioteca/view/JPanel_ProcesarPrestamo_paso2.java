@@ -28,7 +28,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
      */
     public JPanel_ProcesarPrestamo_paso2(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
         this.tableModelLibro = new TableModelLibro();
-        
+
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
 
@@ -52,7 +52,6 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_libros = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jlbl_nombre = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -60,6 +59,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jlbl_isbn = new javax.swing.JLabel();
         jlbl_socio = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(814, 600));
         setMinimumSize(new java.awt.Dimension(814, 600));
@@ -69,12 +69,14 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jLabel1.setText("Titulo");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jtbl_libros.setModel(tableModelLibro);
         jScrollPane1.setViewportView(jtbl_libros);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Buscar");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre");
@@ -82,7 +84,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jlbl_nombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlbl_nombre.setText("jLabel4");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("CANCELAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +109,14 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jlbl_socio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlbl_socio.setText("jLabel6");
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton4.setText("ATRAS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,9 +128,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,18 +147,19 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(34, 34, 34)
+                    .addComponent(jLabel1))
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -162,10 +171,11 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                     .addComponent(jlbl_nombre))
                 .addGap(116, 116, 116)
                 .addComponent(jlbl_socio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -188,11 +198,30 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         this.panelMenu.validate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        JPanel_ProcesarPrestamo_paso1 panelPaso1 = new JPanel_ProcesarPrestamo_paso1(this.panelMenu, this.controlador);
+
+        panelPaso1.setSize(814, 600);
+
+        this.panelMenu.limpiarPanelContenido();
+
+        this.panelMenu.getjPanel_contenido().add(panelPaso1);
+
+        this.panelMenu.repaint();
+        this.panelMenu.validate();        
+       
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;

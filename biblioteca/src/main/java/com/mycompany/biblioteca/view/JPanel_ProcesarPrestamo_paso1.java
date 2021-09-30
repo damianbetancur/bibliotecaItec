@@ -9,6 +9,8 @@ import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
 import com.mycompany.biblioteca.model.Socio;
 import com.mycompany.biblioteca.view.resources.TableModelListenerSocio;
 import com.mycompany.biblioteca.view.resources.TableModelSocio;
+import com.mycompany.biblioteca.view.resources.ValidadorDeCampos;
+import java.awt.Color;
 
 /**
  *
@@ -16,6 +18,9 @@ import com.mycompany.biblioteca.view.resources.TableModelSocio;
  */
 public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
+    //Validado de campos
+    ValidadorDeCampos validadorDeCampos;
+    
     //variables de tabla
     private final TableModelSocio tableModelSocio;
 
@@ -28,6 +33,8 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
     public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
+        
+        this.validadorDeCampos = new ValidadorDeCampos();
         //JTable vacio
         this.tableModelSocio = new TableModelSocio();
 
@@ -37,6 +44,10 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
         //agrega escuchadores de las tablas
         this.jtb_socios.getSelectionModel().addListSelectionListener(new TableModelListenerSocio(this));
+    
+        validadarCampos();
+        
+        setupBotones();
     }
 
     /**
@@ -52,12 +63,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jtf_numeroSocio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtb_socios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jlbl_nombre = new javax.swing.JLabel();
         jlbl_apellido = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jbtn_cancelar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -72,17 +82,14 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel1.setText("N° Socio");
 
         jtf_numeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtf_numeroSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtf_numeroSocioKeyReleased(evt);
+            }
+        });
 
         jtb_socios.setModel(tableModelSocio);
         jScrollPane1.setViewportView(jtb_socios);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre");
@@ -96,11 +103,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jlbl_apellido.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlbl_apellido.setText("jLabel5");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("CANCELAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_cancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jbtn_cancelar.setText("CANCELAR");
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtn_cancelarActionPerformed(evt);
             }
         });
 
@@ -130,7 +137,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jButton2)
+                .addComponent(jbtn_cancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(33, 33, 33))
@@ -141,9 +148,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
-                        .addComponent(jtf_numeroSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(jtf_numeroSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -161,12 +166,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_numeroSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(34, 34, 34)
+                    .addComponent(jLabel1))
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,16 +190,16 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
                     .addComponent(jlbl_dni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jbtn_cancelar)
                     .addComponent(jButton3))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
         this.panelMenu.bloquearBotones(true);
         this.panelMenu.limpiarPanelContenido();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
@@ -220,24 +224,18 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jtf_numeroSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_numeroSocioKeyReleased
+        if (this.jtf_numeroSocio.isEditable()) {
+            //Actualizar el TableModel con la lista del controlador
+            this.tableModelSocio.setSocios(this.controlador.buscarSocio(this.jtf_numeroSocio.getText()));
 
-        //Actualizar el TableModel con la lista del controlador
-        this.tableModelSocio.setSocios(this.controlador.buscarSocio(jtf_numeroSocio.getText()));
-
-        //Refrescar el modelo en la tabla
-        this.tableModelSocio.fireTableDataChanged();
-
-        for (Socio sr : this.controlador.buscarSocio(jtf_numeroSocio.getText())) {
-            System.out.println(sr.getNumeroSocio());
+            //Refrescar el modelo en la tabla
+            this.tableModelSocio.fireTableDataChanged();
         }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jtf_numeroSocioKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -245,6 +243,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JLabel jlbl_apellido;
     private javax.swing.JLabel jlbl_dni;
     private javax.swing.JLabel jlbl_nombre;
@@ -267,6 +266,15 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
             this.jlbl_apellido.setText(this.socioSeleccionado.getApellido());
             this.jlbl_dni.setText(this.socioSeleccionado.getDni());
         }
+    }
+    
+    private void validadarCampos(){
+        this.validadorDeCampos.validarSoloNumero(jtf_numeroSocio);
+        this.validadorDeCampos.LimitarCaracteres(jtf_numeroSocio, 5);
+    }
+    
+    private void setupBotones(){
+        this.validadorDeCampos.habilitarBoton(true, jbtn_cancelar, new Color(176, 128, 118), Color.WHITE, Color.GRAY, Color.BLACK);
     }
 
 }
