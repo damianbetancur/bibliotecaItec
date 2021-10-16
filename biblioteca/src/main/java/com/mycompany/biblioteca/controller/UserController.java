@@ -1,9 +1,7 @@
 package com.mycompany.biblioteca.controller;
 
-import com.mycompany.biblioteca.model.Biblioteca;
-import com.mycompany.biblioteca.model.Rol;
+
 import com.mycompany.biblioteca.model.User;
-import com.mycompany.biblioteca.repository.UserRepository;
 import com.mycompany.biblioteca.service.UserService;
 
 
@@ -21,7 +19,7 @@ public class UserController {
     public User login(User userAux){
         User userEncontrado = null;
         for (User ur: this.service.getUsers()) {
-            if (ur.getUserName().equals(userAux.getUserName())){
+            if (ur.getNickname().equals(userAux.getNickname())){
                 if (ur.getPassword().equals(userAux.getPassword())){
                     userEncontrado = ur;
                 }else{

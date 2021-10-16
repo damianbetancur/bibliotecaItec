@@ -121,10 +121,10 @@ public class JPanelLogin extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         this.userAux = new User();
-        this.userAux.setUserName(jtf_user.getText());
+        this.userAux.setNickname(jtf_user.getText());
         this.userAux.setPassword(jtf_password.getText());
 
-        System.out.println(userAux.getUserName()+" "+ userAux.getPassword());
+        System.out.println(userAux.getNickname()+" "+ userAux.getPassword());
 
         if (this.controller.login(userAux)!= null){
             this.controller.setUserSelected(userAux);

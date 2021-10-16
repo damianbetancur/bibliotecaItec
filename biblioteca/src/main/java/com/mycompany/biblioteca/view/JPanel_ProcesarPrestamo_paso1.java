@@ -5,8 +5,8 @@
  */
 package com.mycompany.biblioteca.view;
 
-import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
-import com.mycompany.biblioteca.model.Socio;
+import com.mycompany.biblioteca.controller.LoanController;
+import com.mycompany.biblioteca.model.Partner;
 import com.mycompany.biblioteca.view.resources.TableModelListenerSocio;
 import com.mycompany.biblioteca.view.resources.TableModelSocio;
 import com.mycompany.biblioteca.view.resources.ValidadorDeCampos;
@@ -24,15 +24,15 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     //variables de tabla
     private final TableModelSocio tableModelSocio;
 
-    private Socio socioSeleccionado;
+    private Partner socioSeleccionado;
 
-    ProcesarPrestamoController controlador;
+    LoanController controlador;
     private JPanelMenu panelMenu;
 
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
-    public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
+    public JPanel_ProcesarPrestamo_paso1(JPanelMenu panelMenu, LoanController controladorP) {
         
         this.validadorDeCampos = new ValidadorDeCampos();
         //JTable vacio
@@ -204,7 +204,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         if (this.socioSeleccionado != null) {
-            this.controlador.getNuevoPrestamo().setSocio(socioSeleccionado);
+            this.controlador.getNewLoan().setPartner(socioSeleccionado);
             JPanel_ProcesarPrestamo_paso2 panelPaso2 = new JPanel_ProcesarPrestamo_paso2(this.panelMenu, this.controlador);
 
             panelPaso2.setSize(814, 600);
@@ -227,7 +227,7 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
     private void jtf_numeroSocioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_numeroSocioKeyReleased
         if (this.jtf_numeroSocio.isEditable()) {
             //Actualizar el TableModel con la lista del controlador
-            this.tableModelSocio.setSocios(this.controlador.buscarSocio(this.jtf_numeroSocio.getText()));
+            this.tableModelSocio.setPartners(this.controlador.findPartner(this.jtf_numeroSocio.getText()));
 
             //Refrescar el modelo en la tabla
             this.tableModelSocio.fireTableDataChanged();
@@ -260,10 +260,10 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         int filaSeleccionada = this.jtb_socios.getSelectedRow();
         // si la fila esta seleccionada, seteamos la persona auxiliar, llamando al modelo de tabla
         if (filaSeleccionada >= 0) {
-            this.socioSeleccionado = this.tableModelSocio.obteneSocioEn(filaSeleccionada);
-            this.jlbl_numeroSocio.setText(this.socioSeleccionado.getNumeroSocio());
-            this.jlbl_nombre.setText(this.socioSeleccionado.getNombre());
-            this.jlbl_apellido.setText(this.socioSeleccionado.getApellido());
+            this.socioSeleccionado = this.tableModelSocio.getPartnerIn(filaSeleccionada);
+            this.jlbl_numeroSocio.setText(this.socioSeleccionado.getPartnerNumber());
+            this.jlbl_nombre.setText(this.socioSeleccionado.getFirstName());
+            this.jlbl_apellido.setText(this.socioSeleccionado.getLastName());
             this.jlbl_dni.setText(this.socioSeleccionado.getDni());
         }
     }

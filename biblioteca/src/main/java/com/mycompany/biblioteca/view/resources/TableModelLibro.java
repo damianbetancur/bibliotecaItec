@@ -1,8 +1,8 @@
 package com.mycompany.biblioteca.view.resources;
 
-import com.mycompany.biblioteca.model.Libro;
-import com.mycompany.biblioteca.model.Socio;
 
+
+import com.mycompany.biblioteca.model.Book;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import java.util.List;
 public class TableModelLibro extends AbstractTableModel {
 
     private static final String[] COLUMNAS = {"ISBN", "Nombre"};
-    private List<Libro> libros;
+    private List<Book> books;
     
 
     public TableModelLibro() {
-        libros = new ArrayList<>();
+        books = new ArrayList<>();
     }
 
     @Override
     public int getRowCount() {        
-        return libros == null ? 0 : libros.size();
+        return books == null ? 0 : books.size();
     }
 
     @Override
@@ -30,14 +30,14 @@ public class TableModelLibro extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object retorno = null;
-        Libro libro = libros.get(rowIndex);
+        Book book = books.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                retorno = libro.getIsbn();
+                retorno = book.getIsbn();
                 break;
             case 1:
-                retorno = libro.getNombre();
+                retorno = book.getName();
                 break;           
         }
         return retorno;
@@ -48,24 +48,24 @@ public class TableModelLibro extends AbstractTableModel {
         return COLUMNAS[column];
     }
 
-    public void setLibros(List<Libro> libros) {
-        this.libros = libros;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
-    public Libro obtenerLibroEn (int fila) {
-        return libros.get(fila);
+    public Book getBookIn (int row) {
+        return books.get(row);
     }
 
-    public int buscarFilaLibro(Libro libroBuscado){
-        int fila = 0;
-        int contador = 0;
-        for (Libro libror : libros) {
-            contador = contador +1;
-            if (libroBuscado.getIsbn()==libror.getIsbn()) {
-                fila = contador;
+    public int findRowBook(Book bookSearch){
+        int row = 0;
+        int accountant = 0;
+        for (Book bookR : books) {
+            accountant = accountant +1;
+            if (bookSearch.getIsbn()==bookR.getIsbn()) {
+                row = accountant;
             }
         }
-        return fila;
+        return row;
     }
 
 }

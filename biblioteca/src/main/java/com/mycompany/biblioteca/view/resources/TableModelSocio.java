@@ -1,6 +1,6 @@
 package com.mycompany.biblioteca.view.resources;
 
-import com.mycompany.biblioteca.model.Socio;
+import com.mycompany.biblioteca.model.Partner;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -9,16 +9,16 @@ import java.util.List;
 public class TableModelSocio extends AbstractTableModel {
 
     private static final String[] COLUMNAS = {"N° Socio", "Nombre", "Apellido", "DNI"};
-    private List<Socio> socios;
+    private List<Partner> partners;
     
 
     public TableModelSocio() {
-        socios = new ArrayList<>();
+        partners = new ArrayList<>();
     }
 
     @Override
     public int getRowCount() {        
-        return socios == null ? 0 : socios.size();
+        return partners == null ? 0 : partners.size();
     }
 
     @Override
@@ -29,20 +29,20 @@ public class TableModelSocio extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object retorno = null;
-        Socio socio = socios.get(rowIndex);
+        Partner partner = partners.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                retorno = socio.getNumeroSocio();
+                retorno = partner.getPartnerNumber();
                 break;
             case 1:
-                retorno = socio.getNombre();
+                retorno = partner.getFirstName();
                 break;
             case 2:
-                retorno = socio.getApellido();
+                retorno = partner.getLastName();
                 break;
             case 3:
-                retorno = socio.getDni();
+                retorno = partner.getDni();
                 break;
         }
         return retorno;
@@ -53,24 +53,24 @@ public class TableModelSocio extends AbstractTableModel {
         return COLUMNAS[column];
     }
 
-    public void setSocios(List<Socio> socios) {
-        this.socios = socios;
+    public void setPartners(List<Partner> partners) {
+        this.partners = partners;
     }
 
-    public Socio obteneSocioEn (int fila) {
-        return socios.get(fila);
+    public Partner getPartnerIn (int row) {
+        return partners.get(row);
     }
 
-    public int buscarFilaSocio(Socio socioBuscado){
-        int fila = 0;
-        int contador = 0;
-        for (Socio socior : socios) {
-            contador = contador +1;
-            if (socioBuscado.getNumeroSocio()==socior.getNumeroSocio()) {
-                fila = contador;
+    public int findRowPartner(Partner partnerSearch){
+        int row = 0;
+        int accountant = 0;
+        for (Partner partnerR : partners) {
+            accountant = accountant +1;
+            if (partnerSearch.getPartnerNumber()==partnerR.getPartnerNumber()) {
+                row = accountant;
             }
         }
-        return fila;
+        return row;
     }
 
 }

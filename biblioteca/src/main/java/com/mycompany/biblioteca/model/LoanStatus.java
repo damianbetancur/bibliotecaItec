@@ -11,20 +11,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Ariel
  */
 @Entity
-public class Rol_1 implements Serializable {
+@Table(name = "loan_status")
+public class LoanStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "description")
+    @Column(name="description")
     private String description;
 
     public Long getId() {
@@ -45,10 +47,10 @@ public class Rol_1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rol_1)) {
+        if (!(object instanceof LoanStatus)) {
             return false;
         }
-        Rol_1 other = (Rol_1) object;
+        LoanStatus other = (LoanStatus) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -57,7 +59,7 @@ public class Rol_1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.biblioteca.model.Rol_1[ id=" + id + " ]";
+        return "com.mycompany.biblioteca.model.LoanStatus[ id=" + id + " ]";
     }
 
     public String getDescription() {

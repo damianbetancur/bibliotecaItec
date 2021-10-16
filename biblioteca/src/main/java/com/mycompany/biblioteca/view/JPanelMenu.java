@@ -5,7 +5,7 @@
  */
 package com.mycompany.biblioteca.view;
 
-import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
+import com.mycompany.biblioteca.controller.LoanController;
 import com.mycompany.biblioteca.controller.UserController;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -24,7 +24,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         this.controlador = controladorP;
         initComponents();
         
-        this.jlbl_userName.setText(this.controlador.getUserSelected().getUserName());
+        this.jlbl_userName.setText(this.controlador.getUserSelected().getNickname());
     }
 
     /**
@@ -170,7 +170,7 @@ public class JPanelMenu extends javax.swing.JPanel {
     private void jbtn_procesarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_procesarPrestamoActionPerformed
        
        //1-crear controlador
-       ProcesarPrestamoController controlador = new ProcesarPrestamoController();
+       LoanController controlador = new LoanController();
 
 
        //2- crear panel enchufando el controlador creado en paso 1

@@ -5,8 +5,8 @@
  */
 package com.mycompany.biblioteca.view;
 
-import com.mycompany.biblioteca.controller.ProcesarPrestamoController;
-import com.mycompany.biblioteca.model.Libro;
+import com.mycompany.biblioteca.controller.LoanController;
+import com.mycompany.biblioteca.model.Book;
 import com.mycompany.biblioteca.view.resources.TableModelLibro;
 
 /**
@@ -18,15 +18,15 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
     //variables de tabla
     private final TableModelLibro tableModelLibro;
 
-    private Libro libroSeleccionado;
+    private Book libroSeleccionado;
 
-    ProcesarPrestamoController controlador;
+    LoanController controlador;
     private JPanelMenu panelMenu;
 
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
-    public JPanel_ProcesarPrestamo_paso2(JPanelMenu panelMenu, ProcesarPrestamoController controladorP) {
+    public JPanel_ProcesarPrestamo_paso2(JPanelMenu panelMenu, LoanController controladorP) {
         this.tableModelLibro = new TableModelLibro();
 
         this.controlador = controladorP;
@@ -34,7 +34,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
 
         initComponents();
 
-        String data = this.controlador.getNuevoPrestamo().getSocio().getNombre() + " " + this.controlador.getNuevoPrestamo().getSocio().getApellido();
+        String data = this.controlador.getNewLoan().getPartner().getFirstName()+ " " + this.controlador.getNewLoan().getPartner().getLastName();
 
         jlbl_socio.setText(data);
     }

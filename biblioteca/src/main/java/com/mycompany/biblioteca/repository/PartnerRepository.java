@@ -5,7 +5,7 @@
  */
 package com.mycompany.biblioteca.repository;
 
-import com.mycompany.biblioteca.model.Rol_1;
+import com.mycompany.biblioteca.model.Partner;
 import com.mycompany.biblioteca.repository.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Ariel
  */
-public class RolRespository implements Serializable {
+public class PartnerRepository implements Serializable {
 
-    public RolRespository(EntityManagerFactory emf) {
+    public PartnerRepository(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class RolRespository implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Rol_1 rol_1) {
+    public void create(Partner partner) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(rol_1);
+            em.persist(partner);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class RolRespository implements Serializable {
         }
     }
 
-    public void edit(Rol_1 rol_1) throws NonexistentEntityException, Exception {
+    public void edit(Partner partner) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            rol_1 = em.merge(rol_1);
+            partner = em.merge(partner);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = rol_1.getId();
-                if (findRol_1(id) == null) {
-                    throw new NonexistentEntityException("The rol_1 with id " + id + " no longer exists.");
+                Long id = partner.getId();
+                if (findPartner(id) == null) {
+                    throw new NonexistentEntityException("The partner with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class RolRespository implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Rol_1 rol_1;
+            Partner partner;
             try {
-                rol_1 = em.getReference(Rol_1.class, id);
-                rol_1.getId();
+                partner = em.getReference(Partner.class, id);
+                partner.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The rol_1 with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The partner with id " + id + " no longer exists.", enfe);
             }
-            em.remove(rol_1);
+            em.remove(partner);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class RolRespository implements Serializable {
         }
     }
 
-    public List<Rol_1> findRol_1Entities() {
-        return findRol_1Entities(true, -1, -1);
+    public List<Partner> findPartnerEntities() {
+        return findPartnerEntities(true, -1, -1);
     }
 
-    public List<Rol_1> findRol_1Entities(int maxResults, int firstResult) {
-        return findRol_1Entities(false, maxResults, firstResult);
+    public List<Partner> findPartnerEntities(int maxResults, int firstResult) {
+        return findPartnerEntities(false, maxResults, firstResult);
     }
 
-    private List<Rol_1> findRol_1Entities(boolean all, int maxResults, int firstResult) {
+    private List<Partner> findPartnerEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Rol_1.class));
+            cq.select(cq.from(Partner.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class RolRespository implements Serializable {
         }
     }
 
-    public Rol_1 findRol_1(Long id) {
+    public Partner findPartner(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Rol_1.class, id);
+            return em.find(Partner.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getRol_1Count() {
+    public int getPartnerCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Rol_1> rt = cq.from(Rol_1.class);
+            Root<Partner> rt = cq.from(Partner.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
