@@ -45,6 +45,7 @@ public class Book implements Serializable {
     private List<Genre> genres;
     
     
+    /*
     @JoinTable(
             name = "rel_book_authors",
             joinColumns = @JoinColumn(name = "book_fk"),
@@ -52,6 +53,7 @@ public class Book implements Serializable {
     )
     @ManyToMany
     private List<Author> authors;
+     */
     
                     
 
@@ -112,12 +114,6 @@ public class Book implements Serializable {
         this.genres = genres;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
     
 }

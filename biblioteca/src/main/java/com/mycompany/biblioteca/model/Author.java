@@ -33,9 +33,11 @@ public class Author implements Serializable {
     
     @Column(name="last_name")
     private String lastName;
-    
+
+    /*
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
+     */
 
     public Long getId() {
         return id;
@@ -86,13 +88,7 @@ public class Author implements Serializable {
         this.lastName = lastName;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
     
     
 }

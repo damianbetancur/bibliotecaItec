@@ -8,6 +8,10 @@ package com.mycompany.biblioteca.view;
 import com.mycompany.biblioteca.controller.LoanController;
 import com.mycompany.biblioteca.model.Book;
 import com.mycompany.biblioteca.view.resources.TableModelLibro;
+import com.mycompany.biblioteca.view.resources.TableModelListenerLibro;
+import com.mycompany.biblioteca.view.resources.TableModelListenerSocio;
+import com.mycompany.biblioteca.view.resources.ValidadorDeCampos;
+import java.awt.Color;
 
 /**
  *
@@ -15,6 +19,9 @@ import com.mycompany.biblioteca.view.resources.TableModelLibro;
  */
 public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
 
+    //Validado de campos
+    ValidadorDeCampos validadorDeCampos;
+    
     //variables de tabla
     private final TableModelLibro tableModelLibro;
 
@@ -27,16 +34,24 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
     public JPanel_ProcesarPrestamo_paso2(JPanelMenu panelMenu, LoanController controladorP) {
+        this.validadorDeCampos = new ValidadorDeCampos();
+        
         this.tableModelLibro = new TableModelLibro();
 
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
 
         initComponents();
+        
+         //agrega escuchadores de las tablas
+        this.jtbl_libros.getSelectionModel().addListSelectionListener(new TableModelListenerLibro(this));
+    
+        validadarCampos();
+        
+        setupBotones();
+        
 
-        String data = this.controlador.getNewLoan().getPartner().getFirstName()+ " " + this.controlador.getNewLoan().getPartner().getLastName();
-
-        jlbl_socio.setText(data);
+        
     }
 
     /**
@@ -49,17 +64,16 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_titulo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_libros = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jlbl_nombre = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtn_cancelar = new javax.swing.JButton();
+        jbtn_siguiente = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jlbl_isbn = new javax.swing.JLabel();
-        jlbl_socio = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jbtn_atras = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(814, 600));
         setMinimumSize(new java.awt.Dimension(814, 600));
@@ -68,10 +82,10 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Titulo");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtf_titulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtf_titulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
+                jtf_tituloKeyReleased(evt);
             }
         });
 
@@ -84,19 +98,19 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jlbl_nombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlbl_nombre.setText("jLabel4");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("CANCELAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_cancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtn_cancelar.setText("CANCELAR");
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtn_cancelarActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("SIGUIENTE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_siguiente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jbtn_siguiente.setText("SIGUIENTE");
+        jbtn_siguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtn_siguienteActionPerformed(evt);
             }
         });
 
@@ -106,14 +120,11 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         jlbl_isbn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jlbl_isbn.setText("jLabel9");
 
-        jlbl_socio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jlbl_socio.setText("jLabel6");
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton4.setText("ATRAS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_atras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtn_atras.setText("ATRAS");
+        jbtn_atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtn_atrasActionPerformed(evt);
             }
         });
 
@@ -128,7 +139,7 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtf_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,24 +151,19 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlbl_socio, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(33, 33, 33))))
+                .addComponent(jbtn_cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtn_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtn_siguiente)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,40 +175,54 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jlbl_nombre))
-                .addGap(116, 116, 116)
-                .addComponent(jlbl_socio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtn_cancelar)
+                    .addComponent(jbtn_siguiente)
+                    .addComponent(jbtn_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
         this.panelMenu.bloquearBotones(true);
         this.panelMenu.limpiarPanelContenido();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JPanel_ProcesarPrestamo_paso3 panelPaso3 = new JPanel_ProcesarPrestamo_paso3(this.panelMenu);
+    private void jbtn_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_siguienteActionPerformed
+        
+        if (this.libroSeleccionado != null) {
+            this.controlador.getNewLoan().setBook(libroSeleccionado);
+            JPanel_ProcesarPrestamo_paso3 panelPaso3 = new JPanel_ProcesarPrestamo_paso3(this.panelMenu);
+            
+            panelPaso3.setSize(814, 600);
 
-        panelPaso3.setSize(814, 600);
+            this.panelMenu.limpiarPanelContenido();
 
-        this.panelMenu.limpiarPanelContenido();
+            this.panelMenu.getjPanel_contenido().add(panelPaso3);
 
-        this.panelMenu.getjPanel_contenido().add(panelPaso3);
+            this.panelMenu.repaint();
+            this.panelMenu.validate();
+            
+            
+        }else{
+            System.out.println("selecciona socio");
+        }
+        
+    }//GEN-LAST:event_jbtn_siguienteActionPerformed
 
-        this.panelMenu.repaint();
-        this.panelMenu.validate();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jtf_tituloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_tituloKeyReleased
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        if (this.jtf_titulo.isEditable()) {
+            //Actualizar el TableModel con la lista del controlador
+            this.tableModelLibro.setBooks(this.controlador.findBookByTittle(this.jtf_titulo.getText()));
 
-    }//GEN-LAST:event_jTextField1KeyReleased
+            //Refrescar el modelo en la tabla
+            this.tableModelLibro.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jtf_tituloKeyReleased
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_atrasActionPerformed
         
         JPanel_ProcesarPrestamo_paso1 panelPaso1 = new JPanel_ProcesarPrestamo_paso1(this.panelMenu, this.controlador);
 
@@ -215,37 +235,42 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         this.panelMenu.repaint();
         this.panelMenu.validate();        
        
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbtn_atrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtn_atras;
+    private javax.swing.JButton jbtn_cancelar;
+    private javax.swing.JButton jbtn_siguiente;
     private javax.swing.JLabel jlbl_isbn;
     private javax.swing.JLabel jlbl_nombre;
-    private javax.swing.JLabel jlbl_socio;
     private javax.swing.JTable jtbl_libros;
+    private javax.swing.JTextField jtf_titulo;
     // End of variables declaration//GEN-END:variables
 
     /**
      * Selecciona una fila de la tabla, devolviendo un objeto Persona
      */
-//    public void seleccionarLibro() {
-//        //obtiene el indice de la fila seleccionada en la tabla de personas
-//        int filaSeleccionada = this.jtbl_libros.getSelectedRow();
-//        // si la fila esta seleccionada, seteamos la persona auxiliar, llamando al modelo de tabla
-//        if (filaSeleccionada >= 0) {
-//            this.socioSeleccionado = this.tableModelSocio.obteneSocioEn(filaSeleccionada);
-//            this.jlbl_numeroSocio.setText(this.socioSeleccionado.getNumeroSocio());
-//            this.jlbl_nombre.setText(this.socioSeleccionado.getNombre());
-//            this.jlbl_apellido.setText(this.socioSeleccionado.getApellido());
-//            this.jlbl_dni.setText(this.socioSeleccionado.getDni());
-//        }
-//    }
+    public void seleccionarLibro() {        //obtiene el indice de la fila seleccionada en la tabla de personas
+        int filaSeleccionada = this.jtbl_libros.getSelectedRow();
+        // si la fila esta seleccionada, seteamos la persona auxiliar, llamando al modelo de tabla
+        if (filaSeleccionada >= 0) {
+            this.libroSeleccionado = this.tableModelLibro.getBookIn(filaSeleccionada);
+            this.jlbl_isbn.setText(this.libroSeleccionado.getIsbn());
+            this.jlbl_nombre.setText(this.libroSeleccionado.getName());
+        }
+    }
+    
+    private void validadarCampos(){
+        this.validadorDeCampos.validarSoloLetras(jtf_titulo);
+        this.validadorDeCampos.LimitarCaracteres(jtf_titulo, 25);
+    }
+    
+    private void setupBotones(){
+        this.validadorDeCampos.habilitarBoton(true, jbtn_cancelar, new Color(176, 128, 118), Color.WHITE, Color.GRAY, Color.BLACK);
+    }
 }

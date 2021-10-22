@@ -38,9 +38,7 @@ public class BookRepository implements Serializable {
         if (book.getGenres() == null) {
             book.setGenres(new ArrayList<Genre>());
         }
-        if (book.getAuthors() == null) {
-            book.setAuthors(new ArrayList<Author>());
-        }
+
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -52,20 +50,14 @@ public class BookRepository implements Serializable {
             }
             book.setGenres(attachedGenres);
             List<Author> attachedAuthors = new ArrayList<Author>();
-            for (Author authorsAuthorToAttach : book.getAuthors()) {
-                authorsAuthorToAttach = em.getReference(authorsAuthorToAttach.getClass(), authorsAuthorToAttach.getId());
-                attachedAuthors.add(authorsAuthorToAttach);
-            }
-            book.setAuthors(attachedAuthors);
+
+
             em.persist(book);
             for (Genre genresGenre : book.getGenres()) {
                 genresGenre.getBooks().add(book);
                 genresGenre = em.merge(genresGenre);
             }
-            for (Author authorsAuthor : book.getAuthors()) {
-                authorsAuthor.getBooks().add(book);
-                authorsAuthor = em.merge(authorsAuthor);
-            }
+
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -82,8 +74,7 @@ public class BookRepository implements Serializable {
             Book persistentBook = em.find(Book.class, book.getId());
             List<Genre> genresOld = persistentBook.getGenres();
             List<Genre> genresNew = book.getGenres();
-            List<Author> authorsOld = persistentBook.getAuthors();
-            List<Author> authorsNew = book.getAuthors();
+
             List<Genre> attachedGenresNew = new ArrayList<Genre>();
             for (Genre genresNewGenreToAttach : genresNew) {
                 genresNewGenreToAttach = em.getReference(genresNewGenreToAttach.getClass(), genresNewGenreToAttach.getId());
@@ -91,13 +82,8 @@ public class BookRepository implements Serializable {
             }
             genresNew = attachedGenresNew;
             book.setGenres(genresNew);
-            List<Author> attachedAuthorsNew = new ArrayList<Author>();
-            for (Author authorsNewAuthorToAttach : authorsNew) {
-                authorsNewAuthorToAttach = em.getReference(authorsNewAuthorToAttach.getClass(), authorsNewAuthorToAttach.getId());
-                attachedAuthorsNew.add(authorsNewAuthorToAttach);
-            }
-            authorsNew = attachedAuthorsNew;
-            book.setAuthors(authorsNew);
+
+
             book = em.merge(book);
             for (Genre genresOldGenre : genresOld) {
                 if (!genresNew.contains(genresOldGenre)) {
@@ -111,18 +97,9 @@ public class BookRepository implements Serializable {
                     genresNewGenre = em.merge(genresNewGenre);
                 }
             }
-            for (Author authorsOldAuthor : authorsOld) {
-                if (!authorsNew.contains(authorsOldAuthor)) {
-                    authorsOldAuthor.getBooks().remove(book);
-                    authorsOldAuthor = em.merge(authorsOldAuthor);
-                }
-            }
-            for (Author authorsNewAuthor : authorsNew) {
-                if (!authorsOld.contains(authorsNewAuthor)) {
-                    authorsNewAuthor.getBooks().add(book);
-                    authorsNewAuthor = em.merge(authorsNewAuthor);
-                }
-            }
+
+
+
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -157,11 +134,7 @@ public class BookRepository implements Serializable {
                 genresGenre.getBooks().remove(book);
                 genresGenre = em.merge(genresGenre);
             }
-            List<Author> authors = book.getAuthors();
-            for (Author authorsAuthor : authors) {
-                authorsAuthor.getBooks().remove(book);
-                authorsAuthor = em.merge(authorsAuthor);
-            }
+
             em.remove(book);
             em.getTransaction().commit();
         } finally {

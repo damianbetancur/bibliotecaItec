@@ -13,6 +13,7 @@ public class PartnerService {
     private PartnerRepository repository;
 
     public PartnerService() {
+
         this.repository = new PartnerRepository(Conexion.getEmf());
     }
 

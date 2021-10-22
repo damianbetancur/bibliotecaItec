@@ -6,11 +6,12 @@
 package com.mycompany.biblioteca.controller;
 
 
+import com.mycompany.biblioteca.model.Book;
 import com.mycompany.biblioteca.model.Loan;
 import com.mycompany.biblioteca.model.Partner;
+import com.mycompany.biblioteca.service.BookService;
 import com.mycompany.biblioteca.service.PartnerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,15 +21,22 @@ import java.util.List;
 public class LoanController {
     private Loan newLoan;
     
-    private PartnerService service;
+    private final PartnerService partnerService;
+    private final BookService bookService;
 
     public LoanController() {
         this.newLoan = new Loan();
-        this.service = new PartnerService();
+        this.partnerService = new PartnerService();
+        this.bookService = new BookService();
     }
 
     public List<Partner> findPartner(String partnerNumber){
-        return this.service.findByPartnerNumber(partnerNumber);
+        return this.partnerService.findByPartnerNumber(partnerNumber);
+    }
+
+
+    public List<Book> findBookByTittle(String tittle){
+        return this.bookService.findByTittle(tittle);
     }
 
     public Loan getNewLoan() {

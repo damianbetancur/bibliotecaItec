@@ -34,24 +34,15 @@ public class AuthorRepository implements Serializable {
     }
 
     public void create(Author author) {
-        if (author.getBooks() == null) {
-            author.setBooks(new ArrayList<Book>());
-        }
+
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             List<Book> attachedBooks = new ArrayList<Book>();
-            for (Book booksBookToAttach : author.getBooks()) {
-                booksBookToAttach = em.getReference(booksBookToAttach.getClass(), booksBookToAttach.getId());
-                attachedBooks.add(booksBookToAttach);
-            }
-            author.setBooks(attachedBooks);
+
             em.persist(author);
-            for (Book booksBook : author.getBooks()) {
-                booksBook.getAuthors().add(author);
-                booksBook = em.merge(booksBook);
-            }
+
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -66,28 +57,11 @@ public class AuthorRepository implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Author persistentAuthor = em.find(Author.class, author.getId());
-            List<Book> booksOld = persistentAuthor.getBooks();
-            List<Book> booksNew = author.getBooks();
-            List<Book> attachedBooksNew = new ArrayList<Book>();
-            for (Book booksNewBookToAttach : booksNew) {
-                booksNewBookToAttach = em.getReference(booksNewBookToAttach.getClass(), booksNewBookToAttach.getId());
-                attachedBooksNew.add(booksNewBookToAttach);
-            }
-            booksNew = attachedBooksNew;
-            author.setBooks(booksNew);
+
+
             author = em.merge(author);
-            for (Book booksOldBook : booksOld) {
-                if (!booksNew.contains(booksOldBook)) {
-                    booksOldBook.getAuthors().remove(author);
-                    booksOldBook = em.merge(booksOldBook);
-                }
-            }
-            for (Book booksNewBook : booksNew) {
-                if (!booksOld.contains(booksNewBook)) {
-                    booksNewBook.getAuthors().add(author);
-                    booksNewBook = em.merge(booksNewBook);
-                }
-            }
+
+
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -117,11 +91,7 @@ public class AuthorRepository implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The author with id " + id + " no longer exists.", enfe);
             }
-            List<Book> books = author.getBooks();
-            for (Book booksBook : books) {
-                booksBook.getAuthors().remove(author);
-                booksBook = em.merge(booksBook);
-            }
+
             em.remove(author);
             em.getTransaction().commit();
         } finally {
