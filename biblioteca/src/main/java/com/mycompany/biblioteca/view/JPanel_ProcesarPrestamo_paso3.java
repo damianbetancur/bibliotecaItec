@@ -5,19 +5,51 @@
  */
 package com.mycompany.biblioteca.view;
 
+import com.mycompany.biblioteca.controller.LoanController;
+import com.mycompany.biblioteca.view.resources.ValidadorDeCampos;
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  *
  * @author ARIEL
  */
 public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
 
+    LocalDate fi = LocalDate.now();
+    LocalDate ff = LocalDate.now();
     private JPanelMenu panelMenu;
+    
+    //Validado de campos
+    ValidadorDeCampos validadorDeCampos;
+    
+    LoanController controlador;
+    
     /**
      * Creates new form JPanel_ProcesarPrestamo_paso1
      */
-    public JPanel_ProcesarPrestamo_paso3(JPanelMenu panelMenu) {
+    public JPanel_ProcesarPrestamo_paso3(JPanelMenu panelMenu, LoanController controladorP) {
+       
+        
         this.panelMenu = panelMenu;
+        this.validadorDeCampos = new ValidadorDeCampos();
+        this.controlador = controladorP;
+        
         initComponents();
+                        
+        this.jlbl_NumeroSocio.setText(this.controlador.getNewLoan().getPartner().getPartnerNumber());
+        this.jlbl_nombre.setText(this.controlador.getNewLoan().getPartner().getFirstName());
+        this.jlbl_apellido.setText(this.controlador.getNewLoan().getPartner().getLastName());
+        this.jlbl_dni.setText(this.controlador.getNewLoan().getPartner().getDni());
+        
+        this.jlbl_titulo.setText(this.controlador.getNewLoan().getBook().getName());
+        this.jlbl_isbn.setText(this.controlador.getNewLoan().getBook().getIsbn());
+        
+        //this.fechaActual2.plusDays(ABORT)
+        
+        
+        this.jlbl_fechaInicio.setText(fi.toString());
+        
     }
 
     /**
@@ -32,29 +64,29 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        jlbl_NumeroSocio = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jlbl_nombre = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlbl_apellido = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jlbl_dni = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jlbl_titulo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jlbl_autor = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
+        jlbl_isbn = new javax.swing.JLabel();
+        jSlider_diasPrestamo = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jlbl_fechaInicio = new javax.swing.JLabel();
+        jlbl_fechaFin = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(814, 600));
         setMinimumSize(new java.awt.Dimension(814, 600));
@@ -68,8 +100,8 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Socio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("jLabel9");
+        jlbl_NumeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_NumeroSocio.setText("jLabel9");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("N° Socio");
@@ -77,20 +109,20 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("jLabel4");
+        jlbl_nombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_nombre.setText("jLabel4");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Apellido");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("jLabel5");
+        jlbl_apellido.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_apellido.setText("jLabel5");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("DNI");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("jLabel8");
+        jlbl_dni.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_dni.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,10 +137,10 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlbl_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                    .addComponent(jlbl_apellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbl_dni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbl_NumeroSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(79, 79, 79))
         );
         jPanel1Layout.setVerticalGroup(
@@ -117,19 +149,19 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(jlbl_NumeroSocio))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(jlbl_nombre))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(jlbl_apellido))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
+                    .addComponent(jlbl_dni))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -138,20 +170,20 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Titulo");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("jLabel9");
+        jlbl_titulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_titulo.setText("jLabel9");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Autor");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("jLabel4");
+        jlbl_autor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_autor.setText("jLabel4");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel14.setText("Genero");
+        jLabel14.setText("ISBN");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel15.setText("jLabel5");
+        jlbl_isbn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_isbn.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,19 +192,19 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel14))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(52, 52, 52))
+                            .addComponent(jlbl_titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                            .addComponent(jlbl_autor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(52, 52, 52))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlbl_isbn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,22 +212,31 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(jlbl_titulo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel12))
+                    .addComponent(jlbl_autor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15))
+                    .addComponent(jlbl_isbn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jSlider1.setMaximum(3);
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setSnapToTicks(true);
+        jSlider_diasPrestamo.setMajorTickSpacing(3);
+        jSlider_diasPrestamo.setMaximum(3);
+        jSlider_diasPrestamo.setMinimum(1);
+        jSlider_diasPrestamo.setMinorTickSpacing(1);
+        jSlider_diasPrestamo.setPaintLabels(true);
+        jSlider_diasPrestamo.setPaintTicks(true);
+        jSlider_diasPrestamo.setToolTipText("");
+        jSlider_diasPrestamo.setValue(1);
+        jSlider_diasPrestamo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider_diasPrestamoStateChanged(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Dias de Prestamo");
@@ -217,11 +258,11 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel17.setText("fecha Fin");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel18.setText("jLabel18");
+        jlbl_fechaInicio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_fechaInicio.setText("jLabel18");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel19.setText("jLabel19");
+        jlbl_fechaFin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jlbl_fechaFin.setText("jLabel19");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -239,17 +280,15 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel17))
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jButton1))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbl_fechaFin)
+                            .addComponent(jlbl_fechaInicio)
+                            .addComponent(jSlider_diasPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -270,23 +309,26 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jSlider_diasPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel18))
+                    .addComponent(jlbl_fechaInicio))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel19))
-                .addGap(35, 35, 35)
+                    .addComponent(jlbl_fechaFin))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
-                .addGap(43, 43, 43)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
@@ -299,6 +341,13 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
         this.panelMenu.limpiarPanelContenido();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jSlider_diasPrestamoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider_diasPrestamoStateChanged
+        System.out.println(jSlider_diasPrestamo.getValue());
+        long d = jSlider_diasPrestamo.getValue();
+        ff = fi.plusDays(d);
+        this.jlbl_fechaFin.setText(ff.toString());
+    }//GEN-LAST:event_jSlider_diasPrestamoStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -307,25 +356,25 @@ public class JPanel_ProcesarPrestamo_paso3 extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSlider_diasPrestamo;
+    private javax.swing.JLabel jlbl_NumeroSocio;
+    private javax.swing.JLabel jlbl_apellido;
+    private javax.swing.JLabel jlbl_autor;
+    private javax.swing.JLabel jlbl_dni;
+    private javax.swing.JLabel jlbl_fechaFin;
+    private javax.swing.JLabel jlbl_fechaInicio;
+    private javax.swing.JLabel jlbl_isbn;
+    private javax.swing.JLabel jlbl_nombre;
+    private javax.swing.JLabel jlbl_titulo;
     // End of variables declaration//GEN-END:variables
 }

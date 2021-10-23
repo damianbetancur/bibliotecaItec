@@ -34,10 +34,7 @@ public class BookStock implements Serializable {
     
     @OneToOne
     private Book book;
-    
-    @ManyToOne
-    @JoinColumn(name = "library_fk")
-    private Library BookStockLibrary;
+        
 
     public Long getId() {
         return id;
@@ -87,13 +84,6 @@ public class BookStock implements Serializable {
     public void setBook(Book book) {
         this.book = book;
     }
-
-    public Library getBookStockLibrary() {
-        return BookStockLibrary;
-    }
-
-    public void setBookStockLibrary(Library BookStockLibrary) {
-        this.BookStockLibrary = BookStockLibrary;
-    }
+   
     
 }

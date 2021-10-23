@@ -6,17 +6,15 @@
 package com.mycompany.biblioteca.repository;
 
 import com.mycompany.biblioteca.model.Author;
+import com.mycompany.biblioteca.repository.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.mycompany.biblioteca.model.Book;
-import com.mycompany.biblioteca.repository.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -34,15 +32,11 @@ public class AuthorRepository implements Serializable {
     }
 
     public void create(Author author) {
-
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Book> attachedBooks = new ArrayList<Book>();
-
             em.persist(author);
-
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -56,12 +50,7 @@ public class AuthorRepository implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Author persistentAuthor = em.find(Author.class, author.getId());
-
-
             author = em.merge(author);
-
-
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -91,7 +80,6 @@ public class AuthorRepository implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The author with id " + id + " no longer exists.", enfe);
             }
-
             em.remove(author);
             em.getTransaction().commit();
         } finally {

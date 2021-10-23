@@ -6,6 +6,7 @@
 package com.mycompany.biblioteca.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 /**
  *
@@ -31,17 +31,14 @@ public class Loan implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Temporal(TemporalType.DATE)
+
     @Column(name = "initial_date")
-    private Date initialDate;
+    private LocalDate initialDate;
     
-    @Temporal(TemporalType.DATE)
+ 
     @Column(name = "final_date")
-    private Date finalDate;
-    
-    @ManyToOne
-    @JoinColumn(name = "library_fk")
-    private Library LoanLibrary;
+    private LocalDate finalDate;
+       
     
     @ManyToOne
     @JoinColumn(name = "book_fk")
@@ -88,29 +85,9 @@ public class Loan implements Serializable {
         return "com.mycompany.biblioteca.model.Loan[ id=" + id + " ]";
     }
 
-    public Date getInitialDate() {
-        return initialDate;
-    }
+    
 
-    public void setInitialDate(Date initialDate) {
-        this.initialDate = initialDate;
-    }
-
-    public Date getFinalDate() {
-        return finalDate;
-    }
-
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
-    }
-
-    public Library getLoanLibrary() {
-        return LoanLibrary;
-    }
-
-    public void setLoanLibrary(Library LoanLibrary) {
-        this.LoanLibrary = LoanLibrary;
-    }
+   
 
     public Book getBook() {
         return book;

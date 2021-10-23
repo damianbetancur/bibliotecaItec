@@ -46,10 +46,7 @@ public class User implements Serializable {
     @ManyToMany
     private List<Rol> rols;
     
-    @ManyToOne
-    @JoinColumn(name = "library_fk")
-    private Library UserLibrary;
-
+   
     public Long getId() {
         return id;
     }
@@ -107,16 +104,6 @@ public class User implements Serializable {
         this.rols = rols;
     }
 
-    public Library getUserLibrary() {
-        return UserLibrary;
-    }
-
-    public void setUserLibrary(Library UserLibrary) {
-        this.UserLibrary = UserLibrary;
-    }
-
-    
-
-    
+   
 
 }

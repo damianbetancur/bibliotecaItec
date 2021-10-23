@@ -40,9 +40,6 @@ public class Partner implements Serializable {
     @Column(name="last_name")
     private String lastName;
     
-    @ManyToOne
-    @JoinColumn(name = "library_fk")
-    private Library PartnerLibrary;
     
 
     public Long getId() {
@@ -110,12 +107,6 @@ public class Partner implements Serializable {
         this.lastName = lastName;
     }
 
-    public Library getPartnerLibrary() {
-        return PartnerLibrary;
-    }
-
-    public void setPartnerLibrary(Library PartnerLibrary) {
-        this.PartnerLibrary = PartnerLibrary;
-    }
+    
     
 }

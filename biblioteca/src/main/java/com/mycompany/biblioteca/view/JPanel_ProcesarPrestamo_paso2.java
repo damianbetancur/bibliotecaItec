@@ -193,20 +193,16 @@ public class JPanel_ProcesarPrestamo_paso2 extends javax.swing.JPanel {
         
         if (this.libroSeleccionado != null) {
             this.controlador.getNewLoan().setBook(libroSeleccionado);
-            JPanel_ProcesarPrestamo_paso3 panelPaso3 = new JPanel_ProcesarPrestamo_paso3(this.panelMenu);
+            JPanel_ProcesarPrestamo_paso3 panelPaso3 = new JPanel_ProcesarPrestamo_paso3(this.panelMenu, this.controlador);
             
             panelPaso3.setSize(814, 600);
-
             this.panelMenu.limpiarPanelContenido();
-
             this.panelMenu.getjPanel_contenido().add(panelPaso3);
-
             this.panelMenu.repaint();
-            this.panelMenu.validate();
-            
+            this.panelMenu.validate();           
             
         }else{
-            System.out.println("selecciona socio");
+            System.out.println("selecciona un libro");
         }
         
     }//GEN-LAST:event_jbtn_siguienteActionPerformed

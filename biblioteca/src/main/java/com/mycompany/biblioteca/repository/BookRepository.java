@@ -5,17 +5,16 @@
  */
 package com.mycompany.biblioteca.repository;
 
+import com.mycompany.biblioteca.model.Book;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.mycompany.biblioteca.model.Genre;
+import com.mycompany.biblioteca.repository.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
-import com.mycompany.biblioteca.model.Author;
-import com.mycompany.biblioteca.model.Book;
-import com.mycompany.biblioteca.repository.exceptions.NonexistentEntityException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -38,7 +37,6 @@ public class BookRepository implements Serializable {
         if (book.getGenres() == null) {
             book.setGenres(new ArrayList<Genre>());
         }
-
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,15 +47,11 @@ public class BookRepository implements Serializable {
                 attachedGenres.add(genresGenreToAttach);
             }
             book.setGenres(attachedGenres);
-            List<Author> attachedAuthors = new ArrayList<Author>();
-
-
             em.persist(book);
             for (Genre genresGenre : book.getGenres()) {
                 genresGenre.getBooks().add(book);
                 genresGenre = em.merge(genresGenre);
             }
-
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -74,7 +68,6 @@ public class BookRepository implements Serializable {
             Book persistentBook = em.find(Book.class, book.getId());
             List<Genre> genresOld = persistentBook.getGenres();
             List<Genre> genresNew = book.getGenres();
-
             List<Genre> attachedGenresNew = new ArrayList<Genre>();
             for (Genre genresNewGenreToAttach : genresNew) {
                 genresNewGenreToAttach = em.getReference(genresNewGenreToAttach.getClass(), genresNewGenreToAttach.getId());
@@ -82,8 +75,6 @@ public class BookRepository implements Serializable {
             }
             genresNew = attachedGenresNew;
             book.setGenres(genresNew);
-
-
             book = em.merge(book);
             for (Genre genresOldGenre : genresOld) {
                 if (!genresNew.contains(genresOldGenre)) {
@@ -97,9 +88,6 @@ public class BookRepository implements Serializable {
                     genresNewGenre = em.merge(genresNewGenre);
                 }
             }
-
-
-
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -134,7 +122,6 @@ public class BookRepository implements Serializable {
                 genresGenre.getBooks().remove(book);
                 genresGenre = em.merge(genresGenre);
             }
-
             em.remove(book);
             em.getTransaction().commit();
         } finally {
