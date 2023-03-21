@@ -82,6 +82,11 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
         jLabel1.setText("N° Socio");
 
         jtf_numeroSocio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtf_numeroSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_numeroSocioActionPerformed(evt);
+            }
+        });
         jtf_numeroSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtf_numeroSocioKeyReleased(evt);
@@ -233,6 +238,10 @@ public class JPanel_ProcesarPrestamo_paso1 extends javax.swing.JPanel {
             this.tableModelSocio.fireTableDataChanged();
         }
     }//GEN-LAST:event_jtf_numeroSocioKeyReleased
+
+    private void jtf_numeroSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_numeroSocioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_numeroSocioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

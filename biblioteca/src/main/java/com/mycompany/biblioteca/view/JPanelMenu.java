@@ -135,7 +135,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         );
 
         add(jPanel_contenido);
-        jPanel_contenido.setBounds(206, 0, 814, 600);
+        jPanel_contenido.setBounds(200, 0, 814, 600);
 
         jPanel_usuario.setBackground(new java.awt.Color(0, 0, 0));
         jPanel_usuario.setMaximumSize(new java.awt.Dimension(50, 1014));

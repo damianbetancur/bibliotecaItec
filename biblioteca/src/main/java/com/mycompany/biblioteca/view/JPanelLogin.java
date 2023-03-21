@@ -74,6 +74,12 @@ public class JPanelLogin extends javax.swing.JPanel {
             }
         });
 
+        jtf_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_userActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Myanmar Text", 0, 18)); // NOI18N
         jLabel2.setText("PASSWORD");
 
@@ -117,6 +123,10 @@ public class JPanelLogin extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtf_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 

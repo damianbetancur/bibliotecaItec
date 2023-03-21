@@ -8,10 +8,7 @@ package com.mycompany.biblioteca.controller;
 import com.mycompany.biblioteca.repository.Conexion;
 import com.mycompany.biblioteca.view.JFrameLogin;
 
-/**
- *
- * @author Belén
- */
+
 public class Main {
     
     public static void main(String[] args){

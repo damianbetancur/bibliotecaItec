@@ -10,6 +10,7 @@ import com.mycompany.biblioteca.model.Book;
 import com.mycompany.biblioteca.model.Loan;
 import com.mycompany.biblioteca.model.Partner;
 import com.mycompany.biblioteca.service.BookService;
+import com.mycompany.biblioteca.service.LoanService;
 import com.mycompany.biblioteca.service.PartnerService;
 
 import java.util.List;
@@ -21,11 +22,16 @@ import java.util.List;
 public class LoanController {
     private Loan newLoan;
     
+    private final LoanService loanService;
+    
     private final PartnerService partnerService;
     private final BookService bookService;
+    
 
     public LoanController() {
         this.newLoan = new Loan();
+        
+        this.loanService = new LoanService();
         this.partnerService = new PartnerService();
         this.bookService = new BookService();
     }
@@ -43,5 +49,8 @@ public class LoanController {
         return newLoan;
     }
 
+    public void saveLoan (Loan loan){
+        this.loanService.save(loan);
+    }
     
 }

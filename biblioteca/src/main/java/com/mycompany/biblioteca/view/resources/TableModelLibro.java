@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableModelLibro extends AbstractTableModel {
-
     private static final String[] COLUMNAS = {"ISBN", "Nombre"};
     private List<Book> books;
-    
 
     public TableModelLibro() {
         books = new ArrayList<>();
@@ -67,5 +65,4 @@ public class TableModelLibro extends AbstractTableModel {
         }
         return row;
     }
-
 }
